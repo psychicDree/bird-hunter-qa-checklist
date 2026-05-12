@@ -48,7 +48,6 @@
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}
 button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
-/* Layout */
 .app{display:grid;grid-template-rows:auto 1fr;min-height:100dvh}
 header{position:sticky;top:0;z-index:100;background:var(--color-surface);border-bottom:1px solid var(--color-divider);padding:var(--space-4) var(--space-6);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
 .header-left{display:flex;align-items:center;gap:var(--space-3)}
@@ -57,10 +56,27 @@ header{position:sticky;top:0;z-index:100;background:var(--color-surface);border-
 .logo-text{font-size:var(--text-lg);font-weight:700;line-height:1.2}
 .logo-sub{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:400}
 .header-right{display:flex;align-items:center;gap:var(--space-3)}
-.theme-toggle{width:36px;height:36px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);transition:background 180ms ease,color 180ms ease}
-.theme-toggle:hover{background:var(--color-surface-offset);color:var(--color-text)}
+.theme-toggle,.icon-btn{width:36px;height:36px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);transition:background 180ms ease,color 180ms ease}
+.theme-toggle:hover,.icon-btn:hover{background:var(--color-surface-offset);color:var(--color-text)}
+/* DB status pill */
+.db-status{display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-muted);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);border:1px solid var(--color-border);background:var(--color-surface-2)}
+.db-dot{width:7px;height:7px;border-radius:50%;background:var(--color-text-faint);flex-shrink:0;transition:background 300ms}
+.db-dot.ok{background:var(--color-success)}
+.db-dot.err{background:var(--color-error)}
+.db-dot.saving{background:var(--color-gold);animation:pulse 0.8s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+/* Session bar */
+.session-bar{background:var(--color-surface);border-bottom:1px solid var(--color-divider);padding:var(--space-2) var(--space-6);display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap}
+.session-label{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.06em;flex-shrink:0}
+.session-name{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+.session-meta{font-size:var(--text-xs);color:var(--color-text-faint)}
+.session-actions{margin-left:auto;display:flex;gap:var(--space-2)}
+.btn-sm{font-size:var(--text-xs);padding:3px var(--space-3);border-radius:var(--radius-full);border:1px solid var(--color-border);color:var(--color-text-muted);transition:all 180ms ease;white-space:nowrap}
+.btn-sm:hover{background:var(--color-surface-offset);color:var(--color-text);border-color:var(--color-text-muted)}
+.btn-sm.danger:hover{border-color:var(--color-error);color:var(--color-error)}
+.btn-sm.primary{background:var(--color-primary);border-color:var(--color-primary);color:#fff}
+.btn-sm.primary:hover{background:var(--color-primary-hover)}
 main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
-/* Stats Bar */
 .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-bottom:var(--space-6)}
 .stat-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);text-align:center}
 .stat-num{font-size:var(--text-xl);font-weight:700;line-height:1;margin-bottom:var(--space-1)}
@@ -68,12 +84,10 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
 .stat-passed .stat-num{color:var(--color-success)}
 .stat-failed .stat-num{color:var(--color-error)}
 .stat-pending .stat-num{color:var(--color-gold)}
-/* Progress */
 .progress-wrap{margin-bottom:var(--space-8)}
 .progress-label{display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-2)}
 .progress-bar{height:8px;background:var(--color-surface-offset);border-radius:var(--radius-full);overflow:hidden}
 .progress-fill{height:100%;background:var(--color-primary);border-radius:var(--radius-full);transition:width 400ms cubic-bezier(0.16,1,0.3,1)}
-/* Phase Guide */
 .phase-guide{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5);margin-bottom:var(--space-8)}
 .phase-guide-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-4)}
 .phases{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-3)}
@@ -83,7 +97,6 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
 .phase-name{font-size:var(--text-sm);font-weight:600}
 .phase-desc{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-1)}
 .phase-time{font-size:var(--text-xs);color:var(--color-text-faint)}
-/* Controls */
 .controls{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6);flex-wrap:wrap}
 .filter-group{display:flex;gap:var(--space-2)}
 .filter-btn{font-size:var(--text-sm);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-border);color:var(--color-text-muted);transition:all 180ms ease}
@@ -92,7 +105,6 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
 .controls-right{margin-left:auto;display:flex;gap:var(--space-2)}
 .btn-reset{font-size:var(--text-sm);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-border);color:var(--color-text-muted);transition:all 180ms ease}
 .btn-reset:hover{border-color:var(--color-error);color:var(--color-error)}
-/* Sections */
 .section-wrap{margin-bottom:var(--space-8)}
 .section-header{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);cursor:pointer;user-select:none;margin-bottom:var(--space-2);transition:background 180ms ease}
 .section-header:hover{background:var(--color-surface-offset)}
@@ -103,7 +115,6 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
 .section-wrap.collapsed .section-chevron{transform:rotate(-90deg)}
 .section-wrap.collapsed .section-body{display:none}
 .section-body{display:flex;flex-direction:column;gap:var(--space-2);padding-left:var(--space-2)}
-/* Test Items */
 .test-item{display:flex;align-items:flex-start;gap:var(--space-3);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);transition:border-color 180ms ease}
 .test-item:hover{border-color:var(--color-primary)}
 .test-id{font-size:var(--text-xs);color:var(--color-text-faint);font-weight:600;min-width:36px;padding-top:2px;flex-shrink:0}
@@ -114,26 +125,48 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
 .tag{font-size:0.65rem;padding:1px 6px;border-radius:var(--radius-full);background:var(--color-surface-offset);color:var(--color-text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.04em}
 .test-actions{display:flex;flex-direction:column;gap:var(--space-1);flex-shrink:0}
 .status-btn{font-size:var(--text-xs);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);border:1px solid var(--color-border);color:var(--color-text-muted);transition:all 180ms ease;white-space:nowrap}
-.status-btn:hover{opacity:0.8}
 .status-btn.pass{background:color-mix(in oklch,var(--color-success) 12%,transparent);border-color:var(--color-success);color:var(--color-success)}
 .status-btn.fail{background:color-mix(in oklch,var(--color-error) 12%,transparent);border-color:var(--color-error);color:var(--color-error)}
 .status-btn.skip{background:color-mix(in oklch,var(--color-gold) 12%,transparent);border-color:var(--color-gold);color:var(--color-gold)}
 .test-item.status-pass{border-color:color-mix(in oklch,var(--color-success) 40%,transparent)}
 .test-item.status-fail{border-color:color-mix(in oklch,var(--color-error) 40%,transparent)}
 .test-item.status-skip{border-color:color-mix(in oklch,var(--color-gold) 40%,transparent)}
-/* Notes */
 .test-note{margin-top:var(--space-2);width:100%}
 .test-note textarea{width:100%;font-size:var(--text-xs);padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm);border:1px solid var(--color-border);background:var(--color-surface-2);color:var(--color-text);resize:vertical;min-height:60px;font-family:var(--font-body);line-height:1.5;transition:border-color 180ms ease}
 .test-note textarea:focus{outline:none;border-color:var(--color-primary)}
-/* Empty state */
+/* Sessions modal */
+.modal-bg{position:fixed;inset:0;background:oklch(0 0 0/0.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:var(--space-4)}
+.modal-bg.hidden{display:none}
+.modal{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);width:100%;max-width:520px;max-height:80vh;display:flex;flex-direction:column;gap:var(--space-4);box-shadow:var(--shadow-md)}
+.modal-title{font-size:var(--text-lg);font-weight:700}
+.modal-sub{font-size:var(--text-xs);color:var(--color-text-muted)}
+.modal-body{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:var(--space-3)}
+.new-session-row{display:flex;gap:var(--space-2)}
+.new-session-row input{flex:1;font-size:var(--text-sm);padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-2);color:var(--color-text);transition:border-color 180ms ease}
+.new-session-row input:focus{outline:none;border-color:var(--color-primary)}
+.session-list{display:flex;flex-direction:column;gap:var(--space-2)}
+.session-item{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1px solid var(--color-divider);border-radius:var(--radius-md);cursor:pointer;transition:border-color 180ms ease}
+.session-item:hover{border-color:var(--color-primary)}
+.session-item.active{border-color:var(--color-primary);background:color-mix(in oklch,var(--color-primary) 8%,var(--color-surface-2))}
+.session-item-info{flex:1;min-width:0}
+.session-item-name{font-size:var(--text-sm);font-weight:600}
+.session-item-meta{font-size:var(--text-xs);color:var(--color-text-muted)}
+.session-item-del{opacity:0;transition:opacity 180ms ease;color:var(--color-error)}
+.session-item:hover .session-item-del{opacity:1}
+.modal-footer{display:flex;justify-content:flex-end;gap:var(--space-2);border-top:1px solid var(--color-divider);padding-top:var(--space-4)}
 .empty{text-align:center;padding:var(--space-16);color:var(--color-text-muted)}
 .empty svg{margin:0 auto var(--space-4);color:var(--color-text-faint)}
-/* Responsive */
+/* Toast */
+.toast-wrap{position:fixed;bottom:var(--space-6);right:var(--space-6);z-index:300;display:flex;flex-direction:column;gap:var(--space-2);pointer-events:none}
+.toast{font-size:var(--text-xs);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);background:var(--color-text);color:var(--color-bg);box-shadow:var(--shadow-md);opacity:0;transform:translateY(8px);transition:opacity 200ms ease,transform 200ms ease;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
 @media(max-width:640px){
   .stats-bar{grid-template-columns:repeat(2,1fr)}
   .phases{grid-template-columns:1fr}
   header{padding:var(--space-3) var(--space-4)}
   main{padding:var(--space-4)}
+  .session-bar{padding:var(--space-2) var(--space-4)}
+  .db-status span{display:none}
 }
 </style>
 </head>
@@ -157,11 +190,27 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
     </div>
   </div>
   <div class="header-right">
+    <div class="db-status" title="IndexedDB storage status">
+      <span class="db-dot" id="db-dot"></span>
+      <span id="db-status-text">DB</span>
+    </div>
     <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
   </div>
 </header>
+
+<div class="session-bar">
+  <span class="session-label">Session</span>
+  <span class="session-name" id="session-name-display">Loading…</span>
+  <span class="session-meta" id="session-meta"></span>
+  <div class="session-actions">
+    <button class="btn-sm" id="btn-sessions">⊞ Sessions</button>
+    <button class="btn-sm" id="btn-export">↓ Export JSON</button>
+    <button class="btn-sm" id="btn-import-wrap">↑ Import JSON</button>
+    <input type="file" id="import-file" accept=".json" style="display:none">
+  </div>
+</div>
 
 <main>
   <div class="stats-bar">
@@ -170,17 +219,14 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
     <div class="stat-card stat-pending"><div class="stat-num" id="cnt-skip">0</div><div class="stat-label">Pending</div></div>
     <div class="stat-card"><div class="stat-num" id="cnt-total">0</div><div class="stat-label">Total</div></div>
   </div>
-
   <div class="progress-wrap">
     <div class="progress-label"><span>Progress</span><span id="pct-label">0% complete</span></div>
     <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
   </div>
-
   <div class="phase-guide">
     <div class="phase-guide-title">Suggested Test Pass Order — ~2 hours total</div>
     <div class="phases" id="phases-container"></div>
   </div>
-
   <div class="controls">
     <div class="filter-group">
       <button class="filter-btn active" data-filter="all">All</button>
@@ -192,31 +238,53 @@ main{padding:var(--space-6);max-width:1100px;margin-inline:auto;width:100%}
       <button class="btn-reset" id="btn-reset">Reset All</button>
     </div>
   </div>
-
   <div id="checklist-root"></div>
 </main>
 </div>
 
+<!-- Sessions modal -->
+<div class="modal-bg hidden" id="modal-bg">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="QA Sessions">
+    <div>
+      <div class="modal-title">QA Sessions</div>
+      <div class="modal-sub">Each session stores its own test states and notes in IndexedDB.</div>
+    </div>
+    <div class="modal-body">
+      <div class="new-session-row">
+        <input type="text" id="new-session-input" placeholder="New session name, e.g. v1.2 Smoke Test" maxlength="60">
+        <button class="btn-sm primary" id="btn-create-session">+ Create</button>
+      </div>
+      <div class="session-list" id="session-list"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm" id="btn-close-modal">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
 <script>
-const PHASES = [
-  {n:"Phase 1",icon:"🚀",name:"Smoke Test",ids:"1.1–1.3 · 2.1 · 3.1 · 5.1 · 6.1 · 9.1",desc:"Confirm nothing catastrophically broken",time:"10 min"},
-  {n:"Phase 2",icon:"🎮",name:"Core Loop",ids:"Sections 2, 3, 6, 9",desc:"Main gameplay experience end-to-end",time:"30 min"},
-  {n:"Phase 3",icon:"✨",name:"Variety",ids:"Section 5 (movement) · Section 8 (notifications)",desc:"Feel & polish",time:"20 min"},
-  {n:"Phase 4",icon:"📊",name:"Difficulty",ids:"Sections 1, 10",desc:"Playtest curve & fairness tuning",time:"30 min"},
-  {n:"Phase 5",icon:"🐛",name:"Edge & Regression",ids:"Sections 14, 15",desc:"Bug-fix verification",time:"20 min"},
+/* ─── DATA ─────────────────────────────────────────────── */
+const PHASES=[
+  {n:"Phase 1",icon:"🚀",name:"Smoke Test",ids:"1.1–1.3·2.1·3.1·5.1·6.1·9.1",desc:"Confirm nothing catastrophically broken",time:"10 min"},
+  {n:"Phase 2",icon:"🎮",name:"Core Loop",ids:"Sections 2,3,6,9",desc:"Main gameplay experience end-to-end",time:"30 min"},
+  {n:"Phase 3",icon:"✨",name:"Variety",ids:"Section 5·8",desc:"Feel & polish",time:"20 min"},
+  {n:"Phase 4",icon:"📊",name:"Difficulty",ids:"Sections 1,10",desc:"Playtest curve & fairness tuning",time:"30 min"},
+  {n:"Phase 5",icon:"🐛",name:"Edge & Regression",ids:"Sections 14,15",desc:"Bug-fix verification",time:"20 min"},
   {n:"Phase 6",icon:"⚡",name:"Performance",ids:"Section 16",desc:"FPS, memory, UI responsiveness",time:"15 min"},
   {n:"Phase 7",icon:"👾",name:"Bosses",ids:"Section 11",desc:"Boss phases & TTK bypass",time:"10 min"},
 ];
-
-const SECTIONS = [
-  {id:1, name:"Difficulty Curve & Progression", tests:[
+const SECTIONS=[
+  {id:1,name:"Difficulty Curve & Progression",tests:[
     {id:"1.1",title:"Wave 1 cannon cooldown & projectile speed baseline",desc:"Verify Wave 1 uses default Cannon stats. Cooldown 1.5 s, speed 12 m/s. Birds spawn every 2 s at screen edge.",tags:["core","progression"]},
     {id:"1.2",title:"Difficulty scalar increments per wave",desc:"After each wave the SpeedMult +0.05, CooldownMult −0.03, SpawnRate +0.2/s. Log raw values for waves 1-5.",tags:["progression","data"]},
     {id:"1.3",title:"Hard cap — speed & spawn rate",desc:"Speed must never exceed 30 m/s. Spawn rate must never exceed 1 bird/0.4 s. Verify on wave 20+.",tags:["caps","edge"]},
     {id:"1.4",title:"Difficulty persists across scene reloads",desc:"Mid-game quit → re-launch → confirm wave number and scalar values are restored from save.",tags:["save","persistence"]},
     {id:"1.5",title:"Unlock threshold display updates correctly",desc:"Progress bar for next cannon unlock reflects correct wave requirement and highlights when met.",tags:["ui","progression"]},
   ]},
-  {id:2, name:"Cannon Mechanics", tests:[
+  {id:2,name:"Cannon Mechanics",tests:[
     {id:"2.1",title:"Default Cannon fires on tap/click",desc:"Each tap spawns exactly 1 projectile. Verify no double-fire on fast repeated taps.",tags:["core","input"]},
     {id:"2.2",title:"Rapid Cannon burst fire — 3 shots per trigger",desc:"Rapid Cannon fires 3 projectiles per trigger with 0.1 s between. Verify burst count and timing.",tags:["cannon","burst"]},
     {id:"2.3",title:"Spread Cannon fan angle — 15° between projectiles",desc:"3 projectiles spawn at −15°, 0°, +15° from aim vector. Check collision geometry.",tags:["cannon","spread"]},
@@ -227,7 +295,7 @@ const SECTIONS = [
     {id:"2.8",title:"Cannon switch — active selection UI reflects equipped cannon",desc:"HUD icon updates immediately on cannon switch. Cooldown bar resets to new cannon cooldown.",tags:["ui","cannon"]},
     {id:"2.9",title:"Cooldown bar fill rate matches cannon spec",desc:"Each cannon's cooldown bar drains and refills at its documented rate. No UI desync under rapid switching.",tags:["ui","cooldown"]},
   ]},
-  {id:3, name:"Bird Spawning & Behaviour", tests:[
+  {id:3,name:"Bird Spawning & Behaviour",tests:[
     {id:"3.1",title:"Birds spawn at screen edges only",desc:"Spawn points distributed across all 4 edges. No bird spawns inside the play area.",tags:["core","spawn"]},
     {id:"3.2",title:"Standard bird — straight flight path",desc:"Moves in straight line toward opposite edge. No steering unless chased by homing projectile.",tags:["bird","movement"]},
     {id:"3.3",title:"Zigzag bird — lateral oscillation frequency",desc:"Oscillates left/right every 0.8 s with amplitude 1.5 m. Frequency must not scale with difficulty.",tags:["bird","pattern"]},
@@ -237,7 +305,7 @@ const SECTIONS = [
     {id:"3.7",title:"Correct bird type distribution per wave tier",desc:"Waves 1-5: Standard only. Waves 6-10: introduce Zigzag/Dive. Waves 11+: Shield/Flock available.",tags:["spawn","distribution"]},
     {id:"3.8",title:"Off-screen birds are despawned and counted as escaped",desc:"Bird reaching the far edge → removed from scene, escape counter +1, no memory leak.",tags:["performance","cleanup"]},
   ]},
-  {id:4, name:"Currency & Economy", tests:[
+  {id:4,name:"Currency & Economy",tests:[
     {id:"4.1",title:"Gold awarded per bird kill — correct amounts",desc:"Standard: 10G, Zigzag: 15G, Dive: 15G, Shield: 20G (after shield break), Flock: 10G each + 30G leader bonus.",tags:["economy","rewards"]},
     {id:"4.2",title:"Gem drop RNG — 1% base rate per bird",desc:"Simulate 500 kills, verify gem drop rate is within ±0.5% of 1%. Gem drop plays VFX.",tags:["economy","rng"]},
     {id:"4.3",title:"Currency persists after game over",desc:"Earned gold/gems survive death screen and are present in the store menu.",tags:["save","economy"]},
@@ -245,14 +313,14 @@ const SECTIONS = [
     {id:"4.5",title:"Cannon unlock requires wave gate AND currency",desc:"Cannot purchase cannon if wave gate not reached even if currency sufficient.",tags:["economy","gate"]},
     {id:"4.6",title:"Daily bonus gold awarded once per real day",desc:"Claim daily bonus → flag set → revisit same session → button greyed. Next day (time-skip) → available again.",tags:["economy","daily"]},
   ]},
-  {id:5, name:"Player Movement & Input", tests:[
+  {id:5,name:"Player Movement & Input",tests:[
     {id:"5.1",title:"Aim reticle tracks pointer without lag",desc:"Reticle position matches pointer within 1 frame. No rubber-banding or position snapping.",tags:["core","input"]},
     {id:"5.2",title:"Touch drag — continuous aim update",desc:"Drag on mobile continuously updates aim. No skip or teleport on fast swipe.",tags:["mobile","input"]},
     {id:"5.3",title:"Cannon fires in aimed direction — no offset",desc:"Projectile origin and direction match reticle at time of fire. Test at extreme angles (corners).",tags:["core","accuracy"]},
     {id:"5.4",title:"Multi-touch: aim on one finger, UI on another",desc:"Hold aim touch, tap ability button with second finger. Both inputs register simultaneously.",tags:["mobile","multitouch"]},
     {id:"5.5",title:"Input disabled during death animation",desc:"Taps/clicks during player death animation do not fire projectiles or trigger UI.",tags:["edge","input"]},
   ]},
-  {id:6, name:"Health & Lives System", tests:[
+  {id:6,name:"Health & Lives System",tests:[
     {id:"6.1",title:"Player starts with 3 lives on new game",desc:"Hearts HUD shows 3 filled icons. Life count stored correctly from first frame.",tags:["core","lives"]},
     {id:"6.2",title:"Bird escape costs 1 life",desc:"Bird reaching exit edge → 1 heart becomes empty → life count decremented.",tags:["core","lives"]},
     {id:"6.3",title:"Game over triggers at 0 lives",desc:"3rd escape within a run → death screen appears. No further gameplay input accepted.",tags:["core","gameover"]},
@@ -260,7 +328,7 @@ const SECTIONS = [
     {id:"6.5",title:"Shield power-up prevents 1 life loss",desc:"Shield active → bird escape consumes shield, not a life. HUD shows shield cooldown.",tags:["powerup","shield"]},
     {id:"6.6",title:"Revive ad offer appears on game over",desc:"Death screen shows revive button. Simulate ad completion → revive with 1 life. Offer only once per run.",tags:["monetisation","revive"]},
   ]},
-  {id:7, name:"Power-Ups", tests:[
+  {id:7,name:"Power-Ups",tests:[
     {id:"7.1",title:"Slow-Mo — 50% game speed for 5 s",desc:"Time.timeScale = 0.5 for 5 real seconds. All birds and projectiles affected. Cooldowns unaffected.",tags:["powerup","timing"]},
     {id:"7.2",title:"Magnet — pulls coins within 8 m radius",desc:"All coins within 8 m arc toward player at 10 m/s. Coins outside radius unaffected.",tags:["powerup","magnet"]},
     {id:"7.3",title:"Double Gold — 2× gold for 10 s",desc:"All kills during active window award 2× documented gold values. Window timer visible in HUD.",tags:["powerup","economy"]},
@@ -268,27 +336,27 @@ const SECTIONS = [
     {id:"7.5",title:"Power-up timer HUD accuracy",desc:"Countdown timer matches real-time elapsed. No drift over 10 s window. Disappears on expiry.",tags:["ui","timing"]},
     {id:"7.6",title:"Stacking power-ups — no unintended interactions",desc:"Activate Slow-Mo then Double Gold simultaneously. Both timers run independently, no shared state corruption.",tags:["edge","stacking"]},
   ]},
-  {id:8, name:"Notifications & Feedback", tests:[
+  {id:8,name:"Notifications & Feedback",tests:[
     {id:"8.1",title:"Kill combo display — 3+ hit streak shows multiplier",desc:"3 kills <0.5 s apart triggers combo text. x2 at 3, x3 at 5, x4 at 8+. Resets after 0.5 s gap.",tags:["feedback","combo"]},
     {id:"8.2",title:"Score popup spawns at bird death position",desc:"+10G floats upward 1.5 m and fades over 0.8 s. Positioned at bird world coordinates.",tags:["feedback","vfx"]},
     {id:"8.3",title:"Wave cleared banner — no overlap with gameplay",desc:"'Wave X Clear!' banner appears for 2 s then fades. Does not obscure health bar or cannon HUD.",tags:["ui","feedback"]},
     {id:"8.4",title:"Achievement toast — non-intrusive positioning",desc:"Achievement unlock toast appears top-right for 3 s. Does not block aim reticle or score display.",tags:["ui","achievement"]},
     {id:"8.5",title:"Low health warning — pulse on final life",desc:"Heart HUD pulses red at 60 bpm when 1 life remaining. Stops if life restored.",tags:["feedback","warning"]},
   ]},
-  {id:9, name:"UI & HUD", tests:[
+  {id:9,name:"UI & HUD",tests:[
     {id:"9.1",title:"HUD elements — no overlap at 16:9 and 9:16",desc:"Place all HUD elements at both landscape and portrait resolutions. No z-index collision.",tags:["ui","resolution"]},
     {id:"9.2",title:"Pause menu — game stops, resumes correctly",desc:"Pause halts physics and spawning. Resume restores exact game state. No bird position teleport.",tags:["ui","pause"]},
     {id:"9.3",title:"Settings screen — SFX and music toggles work",desc:"Toggle SFX off → no SFX on bird kill. Toggle music off → BGM stops within 1 s.",tags:["ui","audio"]},
     {id:"9.4",title:"High score display updates on new best",desc:"New high score → leaderboard row updates immediately. Previous best preserved in history.",tags:["ui","score"]},
     {id:"9.5",title:"Store UI — insufficient currency feedback",desc:"Attempt buy with no funds → button shake animation + 'Insufficient Gold' tooltip. No accidental purchase.",tags:["ui","store"]},
   ]},
-  {id:10, name:"Wave Completion & Transitions", tests:[
+  {id:10,name:"Wave Completion & Transitions",tests:[
     {id:"10.1",title:"Wave ends only when all birds dead or escaped",desc:"Wave complete event fires only when bird count == 0. No premature trigger.",tags:["core","wave"]},
     {id:"10.2",title:"Between-wave shop window opens for 15 s",desc:"Shop overlay auto-appears post-wave. Auto-closes at 15 s or on manual close.",tags:["wave","shop"]},
     {id:"10.3",title:"Wave number increments correctly",desc:"Wave 5 → Wave 6 after clear. No double-increment on rapid scene transition.",tags:["wave","counter"]},
     {id:"10.4",title:"Endless mode — wave counter rolls over at 99",desc:"After wave 99, counter resets to 1 (or continues to 100). Difficulty scalar continues without resetting.",tags:["wave","endless"]},
   ]},
-  {id:11, name:"Boss Waves", tests:[
+  {id:11,name:"Boss Waves",tests:[
     {id:"11.1",title:"Boss appears every 10 waves",desc:"Wave 10, 20, 30… spawns boss variant. Standard waves between contain no boss logic.",tags:["boss","spawn"]},
     {id:"11.2",title:"Boss phase 1 — standard movement pattern",desc:"Phase 1 active until 50% HP. Boss follows documented path. Speed matches spec.",tags:["boss","phase"]},
     {id:"11.3",title:"Boss phase 2 — speed increase + new attack at 50% HP",desc:"At ≤50% HP: speed +25%, adds dive-bomb attack. Phase transition VFX plays.",tags:["boss","phase"]},
@@ -296,20 +364,20 @@ const SECTIONS = [
     {id:"11.5",title:"Boss death reward — guaranteed gem drop",desc:"Boss death always drops ≥1 gem. May also drop gold. Gem not awarded if boss despawns.",tags:["boss","reward"]},
     {id:"11.6",title:"Boss despawn — no lingering colliders",desc:"Boss exits screen → collider removed within 1 frame. No invisible hit area left.",tags:["boss","cleanup"]},
   ]},
-  {id:12, name:"Audio", tests:[
+  {id:12,name:"Audio",tests:[
     {id:"12.1",title:"SFX: cannon fire plays per shot type",desc:"Each cannon type has distinct fire SFX. No SFX bleed between cannon types after switch.",tags:["audio","sfx"]},
     {id:"12.2",title:"SFX: bird death sound varies by type",desc:"Standard, Shield, and Boss birds each have distinct death audio. No missing audio on kill.",tags:["audio","sfx"]},
     {id:"12.3",title:"BGM loops seamlessly",desc:"Background music loop point has no audible gap or click. Verify over 3+ loop cycles.",tags:["audio","music"]},
     {id:"12.4",title:"No audio during pause",desc:"All SFX and BGM pause when game is paused. No orphaned audio sources continue playing.",tags:["audio","pause"]},
     {id:"12.5",title:"Audio ducking on power-up activation",desc:"BGM ducks to 30% volume for 1 s on Slow-Mo or Bomb activation, then restores.",tags:["audio","ducking"]},
   ]},
-  {id:13, name:"Localisation & Accessibility", tests:[
+  {id:13,name:"Localisation & Accessibility",tests:[
     {id:"13.1",title:"All strings display in supported locales",desc:"Switch language to each supported locale. Verify no missing keys (shown as KEY_NAME). Check UI layout.",tags:["l10n","strings"]},
     {id:"13.2",title:"UI text does not overflow containers in long locales",desc:"Test German/French strings (longest). Text truncates gracefully or container expands. No overflow.",tags:["l10n","layout"]},
     {id:"13.3",title:"Colorblind mode — distinguishable bird types",desc:"Enable colorblind mode → bird type indicators rely on shape/icon, not colour alone.",tags:["a11y","colorblind"]},
     {id:"13.4",title:"Font scaling — text readable at 150% OS font scale",desc:"Set device font to 150%. All HUD text readable. No critical UI element clipped.",tags:["a11y","text"]},
   ]},
-  {id:14, name:"Edge Cases", tests:[
+  {id:14,name:"Edge Cases",tests:[
     {id:"14.1",title:"Rapid cannon switch during cooldown — no state corruption",desc:"Switch cannon while original is cooling down. New cannon cooldown starts fresh. No stuck cooldown.",tags:["edge","cannon"]},
     {id:"14.2",title:"Multiple birds hit simultaneously by AoE",desc:"5 birds bunched <2 m apart, AoE detonates centre. All 5 take damage. No partial application.",tags:["edge","aoe"]},
     {id:"14.3",title:"Power-up collected at exact wave-end frame",desc:"Power-up pickup on same frame wave ends. Power-up effect carries into next wave correctly.",tags:["edge","powerup"]},
@@ -317,14 +385,14 @@ const SECTIONS = [
     {id:"14.5",title:"Network loss during cloud save",desc:"Disable network → kill bird → attempt cloud save. Error toast shown. Local save succeeds. No data loss.",tags:["edge","network"]},
     {id:"14.6",title:"Simultaneous power-up expiry + boss phase transition",desc:"Power-up timer hits 0 at same frame boss crosses 50% HP. Both events fire independently.",tags:["edge","timing"]},
   ]},
-  {id:15, name:"Regression Tests", tests:[
+  {id:15,name:"Regression Tests",tests:[
     {id:"15.1",title:"[BUG-001] Homing projectile targets destroyed birds",desc:"Fixed in v0.9.2. Confirm homing projectile re-acquires live target if original is destroyed before impact.",tags:["regression","homing"]},
     {id:"15.2",title:"[BUG-004] Double gold persists after wave end",desc:"Fixed in v0.9.4. Double Gold timer must reset on wave clear. Kill in wave N+1 should award base gold.",tags:["regression","economy"]},
     {id:"15.3",title:"[BUG-007] Freeze cannon applies to off-screen birds",desc:"Fixed in v0.9.5. Freeze AoE must not affect birds outside camera frustum.",tags:["regression","freeze"]},
     {id:"15.4",title:"[BUG-009] Life overflow above 3 via rapid 1-Up pickup",desc:"Fixed in v0.9.6. Collect two 1-Up items in quick succession at 2 lives → life count must cap at 3.",tags:["regression","lives"]},
     {id:"15.5",title:"[BUG-012] Boss HP bar persists after boss death",desc:"Fixed in v0.9.7. Boss HP bar UI must destroy on boss death event, not on wave clear.",tags:["regression","boss"]},
   ]},
-  {id:16, name:"Performance & Stability", tests:[
+  {id:16,name:"Performance & Stability",tests:[
     {id:"16.1",title:"Target FPS — 60 fps on mid-range device",desc:"Run wave 15+ on target device. FPS must not drop below 55 fps for >1 s. Profile with profiler.",tags:["perf","fps"]},
     {id:"16.2",title:"Memory — no leaks over 10 waves",desc:"Monitor memory every wave for 10 waves. Growth must be <2 MB/wave after GC. No unbounded increase.",tags:["perf","memory"]},
     {id:"16.3",title:"Load time — game ready <3 s on mid-range device",desc:"Cold launch to first input-ready frame <3 s. Loading screen must not stall.",tags:["perf","load"]},
@@ -333,11 +401,157 @@ const SECTIONS = [
   ]},
 ];
 
-const state = {};
-let filter = 'all';
+/* ─── IndexedDB ─────────────────────────────────────────── */
+const DB_NAME='BirdHunterQA', DB_VER=1;
+const STORE_SESSIONS='sessions', STORE_TESTS='tests';
+let db=null;
 
-function getStatus(id){ return state[id]?.status || 'none'; }
-function getNote(id){ return state[id]?.note || ''; }
+function openDB(){
+  return new Promise((res,rej)=>{
+    const req=indexedDB.open(DB_NAME,DB_VER);
+    req.onupgradeneeded=e=>{
+      const d=e.target.result;
+      if(!d.objectStoreNames.contains(STORE_SESSIONS)){
+        const s=d.createObjectStore(STORE_SESSIONS,{keyPath:'id',autoIncrement:true});
+        s.createIndex('name','name',{unique:false});
+      }
+      if(!d.objectStoreNames.contains(STORE_TESTS)){
+        const t=d.createObjectStore(STORE_TESTS,{keyPath:'key'});
+        t.createIndex('sessionId','sessionId',{unique:false});
+      }
+    };
+    req.onsuccess=e=>{db=e.target.result;res(db);};
+    req.onerror=e=>rej(e.target.error);
+  });
+}
+
+function tx(storeName,mode='readonly'){
+  return db.transaction(storeName,mode).objectStore(storeName);
+}
+function idbGet(store,key){return new Promise((r,e)=>{const q=tx(store).get(key);q.onsuccess=()=>r(q.result);q.onerror=e;});}
+function idbPut(store,val){return new Promise((r,e)=>{const q=tx(store,'readwrite').put(val);q.onsuccess=()=>r(q.result);q.onerror=e;});}
+function idbDel(store,key){return new Promise((r,e)=>{const q=tx(store,'readwrite').delete(key);q.onsuccess=()=>r();q.onerror=e;});}
+function idbGetAll(store){return new Promise((r,e)=>{const q=tx(store).getAll();q.onsuccess=()=>r(q.result);q.onerror=e;});}
+function idbGetAllByIndex(store,idx,val){
+  return new Promise((r,e)=>{
+    const q=tx(store).index(idx).getAll(val);
+    q.onsuccess=()=>r(q.result);
+    q.onerror=e;
+  });
+}
+function idbClearByIndex(store,idx,val){
+  return new Promise((r,e)=>{
+    const s=tx(store,'readwrite');
+    const q=s.index(idx).openCursor(IDBKeyRange.only(val));
+    q.onsuccess=ev=>{
+      const cur=ev.target.result;
+      if(cur){cur.delete();cur.continue();}else r();
+    };
+    q.onerror=e;
+  });
+}
+
+/* ─── STATE ─────────────────────────────────────────────── */
+let state={}; // {testId:{status,note}}
+let currentSession=null; // {id,name,createdAt,updatedAt}
+let saveTimer=null;
+let filter='all';
+
+function dbDot(mode){
+  const dot=document.getElementById('db-dot');
+  const txt=document.getElementById('db-status-text');
+  dot.className='db-dot '+mode;
+  if(mode==='ok') txt.textContent='Saved';
+  else if(mode==='saving') txt.textContent='Saving…';
+  else if(mode==='err') txt.textContent='DB Error';
+  else txt.textContent='DB';
+}
+
+function schedSave(){
+  dbDot('saving');
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>persistState(),600);
+}
+
+async function persistState(){
+  if(!db||!currentSession) return;
+  try{
+    const now=new Date().toISOString();
+    currentSession.updatedAt=now;
+    await idbPut(STORE_SESSIONS,currentSession);
+    const all=Object.entries(state).map(([testId,v])=>({
+      key:`${currentSession.id}::${testId}`,
+      sessionId:currentSession.id,
+      testId,
+      status:v.status||'none',
+      note:v.note||'',
+      updatedAt:now
+    }));
+    for(const rec of all) await idbPut(STORE_TESTS,rec);
+    updateSessionMeta();
+    dbDot('ok');
+  }catch(err){
+    console.error('IDB save error',err);
+    dbDot('err');
+  }
+}
+
+async function loadSession(session){
+  currentSession=session;
+  state={};
+  const records=await idbGetAllByIndex(STORE_TESTS,'sessionId',session.id);
+  records.forEach(r=>{
+    state[r.testId]={status:r.status||'none',note:r.note||''};
+  });
+  document.getElementById('session-name-display').textContent=session.name;
+  updateSessionMeta();
+  renderAll();
+  updateStats();
+  dbDot('ok');
+}
+
+function updateSessionMeta(){
+  if(!currentSession) return;
+  const d=new Date(currentSession.updatedAt||currentSession.createdAt);
+  document.getElementById('session-meta').textContent=
+    'Last saved '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+}
+
+async function createSession(name){
+  const now=new Date().toISOString();
+  const id=await idbPut(STORE_SESSIONS,{name,createdAt:now,updatedAt:now});
+  const session={id,name,createdAt:now,updatedAt:now};
+  return session;
+}
+
+async function deleteSession(id){
+  await idbDel(STORE_SESSIONS,id);
+  await idbClearByIndex(STORE_TESTS,'sessionId',id);
+}
+
+/* ─── INIT ──────────────────────────────────────────────── */
+async function init(){
+  try{
+    await openDB();
+    dbDot('ok');
+    let sessions=await idbGetAll(STORE_SESSIONS);
+    if(sessions.length===0){
+      const s=await createSession('Default Session');
+      sessions=[s];
+    }
+    await loadSession(sessions[sessions.length-1]);
+  }catch(e){
+    console.error('DB init failed',e);
+    dbDot('err');
+    document.getElementById('session-name-display').textContent='Default (no DB)';
+    renderAll();
+    updateStats();
+  }
+}
+
+/* ─── APP LOGIC ─────────────────────────────────────────── */
+function getStatus(id){return state[id]?.status||'none';}
+function getNote(id){return state[id]?.note||'';}
 
 function updateStats(){
   let pass=0,fail=0,skip=0,total=0;
@@ -359,26 +573,22 @@ function updateStats(){
 
 function setStatus(id,status){
   if(!state[id]) state[id]={};
-  if(state[id].status===status) state[id].status='none';
-  else state[id].status=status;
+  state[id].status=(state[id].status===status)?'none':status;
   renderAll();
   updateStats();
+  schedSave();
 }
 
 function setNote(id,note){
   if(!state[id]) state[id]={};
   state[id].note=note;
+  schedSave();
 }
 
 function renderPhases(){
-  const c=document.getElementById('phases-container');
-  c.innerHTML=PHASES.map(p=>`
+  document.getElementById('phases-container').innerHTML=PHASES.map(p=>`
     <div class="phase-card">
-      <div class="phase-head">
-        <span class="phase-badge">${p.n}</span>
-        <span>${p.icon}</span>
-        <span class="phase-name">${p.name}</span>
-      </div>
+      <div class="phase-head"><span class="phase-badge">${p.n}</span><span>${p.icon}</span><span class="phase-name">${p.name}</span></div>
       <div class="phase-desc">${p.desc}</div>
       <div class="phase-time">⏱ ${p.time}</div>
     </div>`).join('');
@@ -390,7 +600,8 @@ function renderAll(){
   SECTIONS.forEach(sec=>{
     const visible=sec.tests.filter(t=>{
       if(filter==='all') return true;
-      return getStatus(t.id)===filter || (filter==='pending' && getStatus(t.id)==='none');
+      const st=getStatus(t.id);
+      return st===filter||(filter==='pending'&&st==='none');
     });
     if(!visible.length) return;
     html+=`<div class="section-wrap" id="sec-${sec.id}">
@@ -402,7 +613,7 @@ function renderAll(){
       </div>
       <div class="section-body">${visible.map(t=>{
         const st=getStatus(t.id);
-        return `<div class="test-item${st!=='none'?' status-'+st:''}" id="ti-${t.id.replace('.','_')}">
+        return `<div class="test-item${st!=='none'?' status-'+st:''}">
           <div class="test-id">${t.id}</div>
           <div class="test-content">
             <div class="test-title">${t.title}</div>
@@ -423,10 +634,86 @@ function renderAll(){
   root.innerHTML=html;
 }
 
-function toggleSection(id){
-  document.getElementById('sec-'+id).classList.toggle('collapsed');
+function toggleSection(id){document.getElementById('sec-'+id).classList.toggle('collapsed');}
+
+/* ─── SESSIONS MODAL ────────────────────────────────────── */
+async function openModal(){
+  document.getElementById('modal-bg').classList.remove('hidden');
+  await refreshSessionList();
+}
+function closeModal(){document.getElementById('modal-bg').classList.add('hidden');}
+
+async function refreshSessionList(){
+  const sessions=await idbGetAll(STORE_SESSIONS);
+  const el=document.getElementById('session-list');
+  if(!sessions.length){el.innerHTML='<p style="color:var(--color-text-muted);font-size:var(--text-xs)">No sessions yet.</p>';return;}
+  el.innerHTML=sessions.map(s=>`
+    <div class="session-item${currentSession&&s.id===currentSession.id?' active':''}" onclick="switchSession(${s.id})">
+      <div class="session-item-info">
+        <div class="session-item-name">${s.name}</div>
+        <div class="session-item-meta">Created ${new Date(s.createdAt).toLocaleDateString()} · Updated ${new Date(s.updatedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+      </div>
+      <button class="session-item-del btn-sm danger" onclick="event.stopPropagation();removeSession(${s.id})" title="Delete session">✕</button>
+    </div>`).join('');
 }
 
+async function switchSession(id){
+  const sessions=await idbGetAll(STORE_SESSIONS);
+  const s=sessions.find(x=>x.id===id);
+  if(s){await loadSession(s);closeModal();showToast('Loaded session: '+s.name);}
+}
+
+async function removeSession(id){
+  if(!confirm('Delete this session and all its test data?')) return;
+  if(currentSession&&currentSession.id===id){
+    showToast('Cannot delete the active session.','err');return;
+  }
+  await deleteSession(id);
+  await refreshSessionList();
+  showToast('Session deleted.');
+}
+
+/* ─── EXPORT / IMPORT ───────────────────────────────────── */
+function exportJSON(){
+  const data={session:currentSession,state,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`qa-${(currentSession?.name||'session').replace(/\s+/g,'-')}-${Date.now()}.json`;
+  a.click();
+  showToast('Exported JSON.');
+}
+
+async function importJSON(file){
+  try{
+    const text=await file.text();
+    const data=JSON.parse(text);
+    if(!data.state||typeof data.state!=='object') throw new Error('Invalid format');
+    const name=(data.session?.name||file.name.replace('.json',''))+' (imported)';
+    const s=await createSession(name);
+    await loadSession(s);
+    state={...data.state};
+    await persistState();
+    renderAll();
+    updateStats();
+    showToast('Imported: '+name);
+  }catch(e){
+    showToast('Import failed: '+e.message,'err');
+  }
+}
+
+/* ─── TOAST ─────────────────────────────────────────────── */
+let toastTimer=null;
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=type==='err'?'var(--color-error)':'var(--color-text)';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+/* ─── EVENT LISTENERS ───────────────────────────────────── */
 document.querySelectorAll('.filter-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -437,12 +724,34 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 });
 
 document.getElementById('btn-reset').addEventListener('click',()=>{
-  if(!confirm('Reset all test statuses and notes?')) return;
+  if(!confirm('Reset all test statuses and notes for this session?')) return;
   Object.keys(state).forEach(k=>delete state[k]);
   renderAll();
   updateStats();
+  schedSave();
+  showToast('Session reset.');
 });
 
+document.getElementById('btn-sessions').addEventListener('click',openModal);
+document.getElementById('btn-close-modal').addEventListener('click',closeModal);
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+
+document.getElementById('btn-create-session').addEventListener('click',async()=>{
+  const input=document.getElementById('new-session-input');
+  const name=input.value.trim();
+  if(!name){showToast('Enter a session name.','err');return;}
+  const s=await createSession(name);
+  await loadSession(s);
+  input.value='';
+  await refreshSessionList();
+  showToast('Session created: '+name);
+});
+
+document.getElementById('btn-export').addEventListener('click',exportJSON);
+document.getElementById('btn-import-wrap').addEventListener('click',()=>document.getElementById('import-file').click());
+document.getElementById('import-file').addEventListener('change',e=>{if(e.target.files[0])importJSON(e.target.files[0]);});
+
+/* Theme toggle */
 (function(){
   const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
   let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
@@ -450,14 +759,12 @@ document.getElementById('btn-reset').addEventListener('click',()=>{
   t&&t.addEventListener('click',()=>{
     d=d==='dark'?'light':'dark';
     r.setAttribute('data-theme',d);
-    t.setAttribute('aria-label','Switch to '+(d==='dark'?'light':'dark')+' mode');
     t.innerHTML=d==='dark'?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   });
 })();
 
 renderPhases();
-renderAll();
-updateStats();
+init();
 </script>
 </body>
 </html>
